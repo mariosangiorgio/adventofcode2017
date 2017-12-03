@@ -1,0 +1,88 @@
+// Given a number, we know can decompose it such that
+// n = (2*ring + 1)^2 + offset
+// ring tells us what is the highest ring (0-indexed) we already completed.
+//
+// The new ring has ((2*(ring+1)+1)^2 - (2*ring+1)^2) values that need to be filled.
+// Each side of the square has one quarter of them.
+//
+// Depending on the side, we can get the coordinates this way:
+// right: (ring', ring' - side_offset)
+// up: (ring' - side_offset, - ring')
+// left: (-ring', -ring' + side_offset)
+// bottom: (-ring' + side_offset, ring')
+//
+// The distance is the sum of the absolute values of the coordinates.
+
+fun exp(base, exponent){
+  if(exponent == 1){
+    return base;
+  }
+  return base * exp(base, exponent - 1);
+}
+
+fun div(a, b){
+  var q = 0;
+  while(a > b){
+    q = q + 1;
+    a = a - b;
+  }
+  return q;
+}
+
+fun mod(a, b){
+  var q = 0;
+  while(a > b){
+    q = q + 1;
+    a = a - b;
+  }
+  return a;
+}
+
+fun abs(n){
+  if(n > 0){
+    return n;
+  }
+  return -n;
+}
+
+fun num_ring_elements(ring){
+  return exp(2*ring + 1, 2);
+}
+
+fun find_ring(n){
+  var ring = 0;
+  while(n > num_ring_elements(ring)){
+    ring = ring + 1;
+  }
+  return ring;
+}
+
+var input = 289326;
+var ring = find_ring(input);
+var filled_ring = ring - 1;
+var offset = input - num_ring_elements(filled_ring);
+var values_to_fill = num_ring_elements(ring) - num_ring_elements(filled_ring);
+var values_per_stride = values_to_fill / 4;
+
+var stride = div(offset, values_per_stride);
+var position = mod(offset, values_per_stride);
+
+var x;
+var y;
+if(stride == 0){
+  x = ring;
+  y = ring - position;
+}
+else if (stride == 1){
+  x = ring  - position;
+  y = -ring;
+}
+else if (stride == 2){
+  x = ring;
+  y = -ring + position;
+}
+else if (stride == 3){
+  x = -ring  + position;
+  y = ring;
+}
+print(abs(x) + abs(y));
