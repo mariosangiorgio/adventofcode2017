@@ -8,3 +8,4 @@
    * Problem actually solved with pen and paper (and maths)
    * Having a standard library helps
    * Sometimes there is no need to code
+4. High entropy passwords - Perl
