@@ -10,6 +10,9 @@
    * Sometimes there is no need to code
 4. High entropy passwords - Perl
 
+# Useful resources
+https://paiza.io/ to avoid needing to install a compiler/interpreter for every language
+
 # More solutions
 Other people are trying to use a different language every day
  * https://github.com/ttencate/aoc2017
