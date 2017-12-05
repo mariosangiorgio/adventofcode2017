@@ -10,3 +10,12 @@
    * Sometimes there is no need to code
 4. High entropy passwords - Perl
 5. A Maze of Twisty Trampolines, All Alike - Lua
+
+# Useful resources
+https://paiza.io/ to avoid needing to install a compiler/interpreter for every language
+
+# More solutions
+Other people are trying to use a different language every day
+ * https://github.com/ttencate/aoc2017
+ * https://github.com/teaearlgraycold/Advent-of-Code-2017
+ * https://github.com/vojtechjelinek/AoC-2017
