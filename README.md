@@ -9,3 +9,4 @@
    * Having a standard library helps
    * Sometimes there is no need to code
 4. High entropy passwords - Perl
+5. A Maze of Twisty Trampolines, All Alike - Lua
