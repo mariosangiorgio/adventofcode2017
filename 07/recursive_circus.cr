@@ -10,11 +10,19 @@ class Entry
   end
 
   def imbalance(data)
-    values = Set.new @children.map{|child| data[child].weight(data).as(Int32)}
-    if values.empty?
-      0
+    from_child = @children.map{|child| data[child].imbalance(data).as(Int32|Nil)}.find{|e|!e.nil?}
+    if from_child.nil?
+        values = @children.group_by{|child| data[child].weight(data).as(Int32)}
+        if values.empty? || values.size == 1
+          nil
+        else
+          puts values
+          to_balance, item = values.find{|k,v| v.size == 1}.as(Tuple(Int32,Array(String)))
+          to_match, _ = values.find{|k,v| v.size != 1}.as(Tuple(Int32,Array(String)))
+          data[item.first].@weight + (to_match - to_balance)
+        end
     else
-      values.max - values.min
+      from_child
     end
   end
 
@@ -30,11 +38,4 @@ File.each_line "/Users/mariosangiorgio/Downloads/input" do |line|
 end
 root = nodes.subtract(children).first
 puts root
-data.each do |key, value|
-  imbalance = value.imbalance(data)
-  if imbalance != 0
-    puts key
-    puts imbalance
-    puts data[key].@children.map{|child| {child, data[child].@weight, data[child].weight(data)}}
-  end
-end
+puts data[root].imbalance(data)
