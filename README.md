@@ -10,6 +10,10 @@
    * Sometimes there is no need to code
 4. High entropy passwords - Perl
 5. A Maze of Twisty Trampolines, All Alike - Lua
+6. Memory reallocation - Elm
+   * Probably not the best language to work with arrays, but that's feasible
+7. Recursive circus - Crystal
+   * Typed languages with Ruby-like syntax are nice
 
 # Useful resources
 https://paiza.io/ to avoid needing to install a compiler/interpreter for every language
