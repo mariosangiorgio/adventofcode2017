@@ -14,6 +14,8 @@
    * Probably not the best language to work with arrays, but that's feasible
 7. Recursive circus - Crystal
    * Typed languages with Ruby-like syntax are nice
+8. I heard you like registers - Nim
+
 
 # Useful resources
 https://paiza.io/ to avoid needing to install a compiler/interpreter for every language
