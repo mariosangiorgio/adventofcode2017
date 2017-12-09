@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
   int chars_read;
 
   int total_score = 0;
+  int total_garbage = 0;
   int depth = 0;
   State state = Content;
   while((chars_read = fread(buffer, sizeof(*buffer), sizeof(buffer)/sizeof(*buffer), f)))
@@ -57,6 +58,8 @@ int main(int argc, char *argv[])
         case '>':
           state = Content;
           break;
+        default:
+          total_garbage++;
         }
         break;
       }
@@ -65,5 +68,6 @@ int main(int argc, char *argv[])
   }
   fclose(f);
   printf("Total score: %d\n", total_score);
+  printf("Total garbage: %d\n", total_garbage);
   return 0;
 }

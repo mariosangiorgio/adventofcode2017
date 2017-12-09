@@ -15,6 +15,7 @@
 7. Recursive circus - Crystal
    * Typed languages with Ruby-like syntax are nice
 8. I heard you like registers - Nim
+9. Stream processing - C
 
 
 # Useful resources
