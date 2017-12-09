@@ -2,6 +2,7 @@ import tables, strutils, sequtils
 
 var state = initTable[string, int]()
 
+var running_max = 0
 for line in lines "/Users/mariosangiorgio/Downloads/input":
   let tokens = splitWhitespace(line)
   let condition_variable_value = getOrDefault(state, tokens[4])
@@ -33,6 +34,9 @@ for line in lines "/Users/mariosangiorgio/Downloads/input":
       state[variable] = value - operand
     else:
       raise newException(Exception, "invalid operator")
+    if state[variable] > running_max:
+      running_max = state[variable]
+echo running_max
 var max = 0
 for value in state.values:
   if value > max:
