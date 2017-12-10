@@ -16,7 +16,7 @@
    * Typed languages with Ruby-like syntax are nice
 8. I heard you like registers - Nim
 9. Stream processing - C
-
+10. Knot hash - R
 
 # Useful resources
 https://paiza.io/ to avoid needing to install a compiler/interpreter for every language
