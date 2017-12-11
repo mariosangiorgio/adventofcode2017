@@ -17,6 +17,7 @@
 8. I heard you like registers - Nim
 9. Stream processing - C
 10. Knot hash - R
+11. Hex ed - Javascript
 
 # Useful resources
 https://paiza.io/ to avoid needing to install a compiler/interpreter for every language
