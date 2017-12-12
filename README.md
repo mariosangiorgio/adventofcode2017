@@ -18,6 +18,7 @@
 9. Stream processing - C
 10. Knot hash - R
 11. Hex ed - Javascript
+12. Digital plumber - PHP
 
 # Useful resources
 https://paiza.io/ to avoid needing to install a compiler/interpreter for every language
