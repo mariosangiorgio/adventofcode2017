@@ -1,6 +1,10 @@
 import java.io.*;
 
 public class DiskDefragmentation{
+  private static int bits(byte value){
+    int n = Integer.parseInt(String.valueOf((char) value), 16);
+    return Integer.bitCount(n);
+  }
   public static void main(String[] args){
         String fileName = "input";
         try {
@@ -10,20 +14,11 @@ public class DiskDefragmentation{
             int nRead = 0;
             while((nRead = inputStream.read(buffer)) != -1) {
                 for(int i=0; i<nRead; ++i){
-                  int n = 0;
-                  if(buffer[i] >= 'a' && buffer[i] <= 'z'){
-                    n = buffer[i] - 'a' + 10;
-                  }
-                  if(buffer[i] >= '0' && buffer[i] <= '9'){
-                    n = buffer[i] - '0';
-                  }
-                  int bits = Integer.bitCount(n);
-                  total += bits;
-//                  System.out.println(((char)buffer[i]) + " " + n + " " + bits);
+                  total += bits(buffer[i]);
                 }
             }
             inputStream.close();
-            System.out.println(total);
+            System.out.println("Part 1: " + total);
         }
         catch(FileNotFoundException ex) {
             System.out.println("Unable to open file '" + fileName + "'");
