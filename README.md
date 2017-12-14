@@ -19,7 +19,8 @@
 10. Knot hash - R
 11. Hex ed - Javascript
 12. Digital plumber - PHP
-12. Packet scanners - bash/awk
+13. Packet scanners - bash/awk
+14. Disk defragmentation - Java (Input generated in the solution for day 10)
 
 # Useful resources
 https://paiza.io/ to avoid needing to install a compiler/interpreter for every language
