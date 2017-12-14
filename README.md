@@ -20,7 +20,6 @@
 11. Hex ed - Javascript
 12. Digital plumber - PHP
 12. Packet scanners - bash/awk
-   * The solution to the second part is extremely slow. I also coded a faster solution in Python
 
 # Useful resources
 https://paiza.io/ to avoid needing to install a compiler/interpreter for every language
