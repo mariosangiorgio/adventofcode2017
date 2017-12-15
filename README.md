@@ -21,9 +21,10 @@
 12. Digital plumber - PHP
 13. Packet scanners - bash/awk
 14. Disk defragmentation - Java (Input generated in the solution for day 10)
+15. Dueling generators - Haskell
 
 # Useful resources
-https://paiza.io/ to avoid needing to install a compiler/interpreter for every language
+https://repl.it and https://paiza.io/ to avoid needing to install a compiler/interpreter for every language
 
 # More solutions
 Other people are trying to use a different language every day
