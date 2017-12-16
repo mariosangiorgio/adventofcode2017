@@ -30,33 +30,49 @@ do {
     var values = Array(0...15)
     var data = try NSString(contentsOfFile:  "/Users/mariosangiorgio/Downloads/input",
     encoding: String.Encoding.ascii.rawValue)
-    let instructions =
-          (data as String)
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .components(separatedBy: ",")
-    for instruction in instructions{
-      let from = instruction.index(instruction.startIndex, offsetBy: 0)
-      let to = instruction.index(instruction.startIndex, offsetBy: 1)
-      switch instruction[from..<to] {
-      case "s":
-        shift(values: &values, n: Int(instruction.substring(from: to))!)
-      case "x":
-        let items =
-          instruction
-            .substring(from: to)
-            .components(separatedBy: "/")
-            .map{Int($0)}
-        swapByPosition(values: &values, i: items[0]!, j: items[1]!)
-      case "p":
-        let items =
-          instruction
-            .substring(from: to)
-            .components(separatedBy: "/")
-            .map{Int($0.unicodeScalars.first!.value - 97)}
-        swapByValue(values: &values, a: items[0], b: items[1])
-      default:
-        fatalError()
+    var seen = [Int:String]()
+    seen[0] = "abcdefghijklmnop"
+    let target = 1_000_000_000
+    for iteration in 1..<target{
+      let instructions =
+            (data as String)
+              .trimmingCharacters(in: .whitespacesAndNewlines)
+              .components(separatedBy: ",")
+      for instruction in instructions{
+        let from = instruction.index(instruction.startIndex, offsetBy: 0)
+        let to = instruction.index(instruction.startIndex, offsetBy: 1)
+        switch instruction[from..<to] {
+        case "s":
+          shift(values: &values, n: Int(instruction.substring(from: to))!)
+        case "x":
+          let items =
+            instruction
+              .substring(from: to)
+              .components(separatedBy: "/")
+              .map{Int($0)}
+          swapByPosition(values: &values, i: items[0]!, j: items[1]!)
+        case "p":
+          let items =
+            instruction
+              .substring(from: to)
+              .components(separatedBy: "/")
+              .map{Int($0.unicodeScalars.first!.value - 97)}
+          swapByValue(values: &values, a: items[0], b: items[1])
+        default:
+          fatalError()
+        }
+      }
+      let v = reconstruct(values: values)
+      if(iteration == 1){
+        print("Part 1: " + v)
+      }
+      // Looks for cycles
+      if(v == "abcdefghijklmnop"){
+        print("Part 2: " + seen[target%iteration]!)
+        break
+      }
+      else{
+        seen[iteration] = v
       }
     }
-    print(reconstruct(values: values))
 }
