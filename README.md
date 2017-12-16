@@ -22,6 +22,7 @@
 13. Packet scanners - bash/awk
 14. Disk defragmentation - Java (Input generated in the solution for day 10)
 15. Dueling generators - Haskell
+16. Permutation promenade - Swift
 
 # Useful resources
 https://repl.it and https://paiza.io/ to avoid needing to install a compiler/interpreter for every language
