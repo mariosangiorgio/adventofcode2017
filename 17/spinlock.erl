@@ -1,5 +1,5 @@
 -module(spinlock).
--export([main/0, spinlock/5, spinlock2/5, item_after/2]).
+-export([main/0]).
 
 
 spinlock(List, _Steps, _Current, ToInsert, Target) when  ToInsert > Target ->
@@ -9,17 +9,18 @@ spinlock(List, Steps, Current, ToInsert, Target) ->
   {Before, After} = lists:split(Destination, List),
   spinlock(Before ++ [ToInsert | After], Steps, Destination, ToInsert + 1, Target).
 
-spinlock2(Count, _Steps, _Current, ToInsert, Target) when  ToInsert > Target ->
-  Count;
-spinlock2(Count, Steps, Current, ToInsert, Target) ->
+after_zero(_Count, ValueAfterZero, _Steps, _Current, ToInsert, Target) when  ToInsert > Target ->
+  ValueAfterZero;
+after_zero(Count, ValueAfterZero, Steps, Current, ToInsert, Target) ->
   Destination = (Current + Steps) rem Count + 1,
-  if
-    Destination == 1 ->
-      io:format("~w ~w~n", [Count, ToInsert]);
-    true ->
-      ok
-  end,
-  spinlock2(Count + 1, Steps, Destination, ToInsert + 1, Target).
+  NewValueAfterZero =
+    if
+      Destination == 1 ->
+        ToInsert;
+      true ->
+        ValueAfterZero
+    end,
+  after_zero(Count + 1, NewValueAfterZero, Steps, Destination, ToInsert + 1, Target).
 
 %% Note what happens when the item to we want is the last
 item_after(ToFind, [H,I|_Tail]) when ToFind == H ->
@@ -33,4 +34,5 @@ item_after(ToFind, [_H|Tail]) ->
 
 main() ->
   Items = spinlock([0], 369, 0, 1, 2017),
-  io:format("~w~n", [item_after(2017, Items)]).
+  io:format("~w~n", [item_after(2017, Items)]),
+  io:format("~w~n", [after_zero(1, none, 369, 0, 1, 50000000)]).
