@@ -24,6 +24,7 @@
 15. Dueling generators - Haskell
 16. Permutation promenade - Swift
 17. Spinlock - Erlang
+18. Duet - Rust
 
 # Useful resources
 https://repl.it and https://paiza.io/ to avoid needing to install a compiler/interpreter for every language
