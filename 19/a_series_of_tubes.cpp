@@ -23,8 +23,10 @@ int main(){
   }
   int8_t d_row=1;
   int8_t d_column=0;
+  uint32_t steps=1; // Top line, which we discarded
   char c;
   while((c = lines[row][column]) != ' '){
+    steps++;
     if(c == '+'){
       if(d_row == 1 || d_row == -1){
         d_row = 0;
@@ -51,4 +53,5 @@ int main(){
     row += d_row;
     column += d_column;
   }
+  std::cout << std::endl << steps << std::endl;
 }
