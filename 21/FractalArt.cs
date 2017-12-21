@@ -167,15 +167,17 @@ public static class FractalArt{
       File.ReadAllLines("/Users/mariosangiorgio/Downloads/input")
       .Select(ParsePattern)
       .ToList();
-    for(var i = 0; i < 5; ++i){
-      Console.WriteLine(image);
+    for(var i = 0; i < 18; ++i){
       image =
         Image.Compact(
           image.Explode()
           .Select(x => x.Transform(patterns))
           .ToList()
         );
+      if(i==4){
+        Console.WriteLine($"Part 1: {image.PixelsOn()}");
+      }
     }
-    Console.WriteLine(image.PixelsOn());
+    Console.WriteLine($"Part 2: {image.PixelsOn()}");
   }
 }
