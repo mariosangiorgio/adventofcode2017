@@ -8,6 +8,39 @@ defmodule ParticleSwarm do
     {[sx + vx + ax,sy + vy + ay,sz + vz + az],[vx + ax,vy + ay,vz + az],[ax,ay,az]}
   end
 
+  defmacro is_integer_solution(x) do
+    quote do: round(unquote(x)) == unquote(x)
+  end
+
+  def merge(:none, _, _) do :none end
+  def merge(_, :none, _) do :none end
+  def merge(_, _, :none) do :none end
+  def merge({_, s}, {_, s}, {_, s}) when is_integer_solution(s) do s end
+  def merge({_, s}, {_, s}, {s, _}) when is_integer_solution(s) do s end
+  def merge({_, s}, {s, _}, {_, s}) when is_integer_solution(s) do s end
+  def merge({_, s}, {s, _}, {s, _}) when is_integer_solution(s) do s end
+  def merge({s, _}, {_, s}, {_, s}) when is_integer_solution(s) do s end
+  def merge({s, _}, {_, s}, {s, _}) when is_integer_solution(s) do s end
+  def merge({s, _}, {s, _}, {_, s}) when is_integer_solution(s) do s end
+  def merge({s, _}, {s, _}, {s, _}) when is_integer_solution(s) do s end
+  def merge(_, _, _) do :none end
+
+  def solve(a, b, c) do
+    delta = b*b - 4*a*c
+    if delta < 0 do
+      :none
+    else
+      {(-b - :math.sqrt(delta))/2*a, (-b + :math.sqrt(delta))/2*a}
+    end
+  end
+
+  def latest_collision_time({[x1,y1,z1],[vx1,vy1,vz1],[ax1,ay1,az1]}, {[x2,y2,z2],[vx2,vy2,vz2],[ax2,ay2,az2]}) do
+    x = solve((ax1-ax2)/2, (ax1-ax2)/2 + vx1 - vx2, x1 - x2)
+    y = solve((ay1-ay2)/2, (ay1-ay2)/2 + vy1 - vy2, y1 - y2)
+    z = solve((az1-az2)/2, (az1-az2)/2 + vz1 - vz2, z1 - z2)
+    merge(x, y, z)
+  end
+
   def step(all) do
     all
     |> Enum.map(fn({index, item}) -> {index, evolve(item)} end)
@@ -41,7 +74,7 @@ Enum.map( fn({index, {_,_,a}}) ->
   {index, cost}
 end) |>
 Enum.sort_by(fn({_, cost}) -> cost end)
-IO.write(index)
+IO.puts(index)
 # Part 2
 # Analytical solution would be
 # Possible collision times are t such that
@@ -50,4 +83,9 @@ IO.write(index)
 # (da)/2*t^2 + [dv + (da)/2]*t + (ds) = 0
 # Take the smallest t and remove the items
 # repeat till there is no collision left
-ParticleSwarm.step_loop(input, 100) # 100 here is not very principled
+latest_collision_times =
+  for {_, i} <- input, {_, j} <- input, i != j, do: ParticleSwarm.latest_collision_time(i,j)
+latest_collision_time = # upper bound, but that's fine
+  latest_collision_times |> Enum.filter(&(&1 != :none)) |> Enum.max
+left = ParticleSwarm.step_loop(input, round(latest_collision_time)) |> Enum.count
+IO.puts(left)
