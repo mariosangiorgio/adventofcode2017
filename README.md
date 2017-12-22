@@ -28,6 +28,7 @@
 19. A series of tubes - C++
 20. Particle swarm - Elixir
 21. Fractal art - C#
+22. Soporifica virus - Go
 
 # Useful resources
 https://repl.it and https://paiza.io/ to avoid needing to install a compiler/interpreter for every language
