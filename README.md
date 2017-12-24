@@ -29,6 +29,7 @@
 20. Particle swarm - Elixir
 21. Fractal art - C#
 22. Soporifica virus - Go
+23. Coprocessor Conflagration - Typescript
 24. Electromagnetic Moat - Python
 
 # Useful resources
