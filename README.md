@@ -29,6 +29,7 @@
 20. Particle swarm - Elixir
 21. Fractal art - C#
 22. Soporifica virus - Go
+24. Electromagnetic Moat - Python
 
 # Useful resources
 https://repl.it and https://paiza.io/ to avoid needing to install a compiler/interpreter for every language
