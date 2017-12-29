@@ -31,6 +31,7 @@
 22. Soporifica virus - Go
 23. Coprocessor Conflagration - Typescript
 24. Electromagnetic Moat - Python
+25. The Halting Problem - Ruby
 
 # Useful resources
 https://repl.it and https://paiza.io/ to avoid needing to install a compiler/interpreter for every language
